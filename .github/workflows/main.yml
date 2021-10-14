@@ -34,6 +34,9 @@ jobs:
           SSH_KEY: ${{ secrets.REMOTE_SSH_KEY }}
           SSH_HOST: ${{ secrets.REMOTE_SSH_HOST }}
 
+      - name: Adding Known Hosts
+        run: ssh-keyscan -H ${{ secrets.REMOTE_SSH_HOST }} >> ~/.ssh/known_hosts
+
       - name: test run
         run: ssh staging 'touch test.txt'
 
