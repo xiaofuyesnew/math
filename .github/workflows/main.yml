@@ -50,17 +50,15 @@ jobs:
         env:
           PRO_URL: ${{ secrets.PRO_DATABASE_URL }}
 
-      # - name: stop service
-      #   run: ssh staging '/home/ubuntu/.npm-global/bin/pm2 stop math_server'
+      - name: stop service
+        run: ssh staging '${{secrets.NPM_GLOBAL}}pm2 stop math_server'
+        continue-on-error: true
 
       - name: Deploy Server
         run: rsync -avz --delete --exclude 'node_modules' --exclude 'prisma/migrations' --exclude '.env_template' /home/runner/work/math/math/server/ ${{ secrets.REMOTE_SSH_USER }}@${{ secrets.REMOTE_SSH_HOST }}:${{ secrets.REMOTE_SERVER }}
       
       - name: dependencies for server
-        run: ssh staging 'cd math_server && /home/ubuntu/.npm-global/bin/yarn config set registry "https://registry.npm.taobao.org" && /home/ubuntu/.npm-global/bin/yarn'
-
-
-
+        run: ssh staging 'cd math_server && ${{secrets.NPM_GLOBAL}}yarn config set registry "https://registry.npm.taobao.org" && ${{secrets.NPM_GLOBAL}}yarn'
 
       # - name: start server
       #   run: pm2 start math_server
