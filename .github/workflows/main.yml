@@ -48,7 +48,7 @@ jobs:
           touch /home/runner/work/math/math/server/.env
           echo $PRO_URL > /home/runner/work/math/math/server/.env
         env:
-          PRO_URL: ${{ PRO_DATABASE_URL }}
+          PRO_URL: ${{ secrets.PRO_DATABASE_URL }}
 
       - name: stop service
         run: ssh staging 'pm2 stop math_server'
