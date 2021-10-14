@@ -1,0 +1,11 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "app.js",
+  "license": "MIT",
+  "dependencies": {
+    "@prisma/client": "^3.2.1",
+    "koa": "^2.13.3",
+    "prisma": "^3.2.1"
+  }
+}
