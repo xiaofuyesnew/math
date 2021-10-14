@@ -6,6 +6,7 @@
   "dependencies": {
     "@prisma/client": "^3.2.1",
     "koa": "^2.13.3",
+    "koa-bodyparser": "^4.3.0",
     "prisma": "^3.2.1"
   }
 }
