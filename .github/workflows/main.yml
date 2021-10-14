@@ -51,7 +51,7 @@ jobs:
           PRO_URL: ${{ secrets.PRO_DATABASE_URL }}
 
       - name: stop service
-        run: ssh staging 'pm2 stop math_server'
+        run: ssh staging '/home/ubuntu/.npm-global/bin/pm2 stop math_server'
 
       - name: Deploy Server
         run: rsync -avz --delete --exclude 'node_modules' --exclude 'prisma/migrations' --exclude '.env_template' /home/runner/work/math/math/server/ ${{ secrets.REMOTE_SSH_USER }}@${{ secrets.REMOTE_SSH_HOST }}:${{ secrets.REMOTE_SERVER }}
