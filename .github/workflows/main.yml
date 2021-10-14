@@ -59,6 +59,8 @@ jobs:
       - name: dependencies for server
         run: ssh staging 'cd math_server && /home/ubuntu/.npm-global/bin/yarn'
 
+        
+
 
       # - name: start server
       #   run: pm2 start math_server
