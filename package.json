@@ -1,0 +1,25 @@
+{
+  "name": "math",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:xiaofuyesnew/math.git",
+  "author": "xiaofuyesnew <xiaofuyesnew@qq.com>",
+  "license": "MIT",
+  "dependencies": {
+    "vue": "^3.2.20",
+    "vue-router": "^4.0.11",
+    "vuex": "^4.0.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^1.9.3",
+    "@vue/compiler-sfc": "^3.2.20",
+    "sass": "^1.43.2",
+    "vite": "^2.6.7"
+  },
+  "scripts": {
+    "server:start": "pm2 list",
+    "pages:start": "vite",
+    "start": "yarn server:start && yarn pages:start",
+    "build": "vite build"
+  }
+}
