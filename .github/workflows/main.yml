@@ -17,6 +17,15 @@ jobs:
         with:
           node-version: 'lts/*'
 
+      - name: Install SSH Key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.REMOTE_SSH_KEY }}
+          known_hosts: "just-a-placeholder-so-we-don't-get-errors"
+
+      - name: Adding Known Hosts
+        run: ssh-keyscan -H ${{ secrets.REMOTE_SSH_HOST }} >> ~/.ssh/known_hosts
+
       - name: Configure SSH
         run: |
           mkdir -p ~/.ssh/
@@ -34,11 +43,24 @@ jobs:
           SSH_KEY: ${{ secrets.REMOTE_SSH_KEY }}
           SSH_HOST: ${{ secrets.REMOTE_SSH_HOST }}
 
-      - name: Adding Known Hosts
-        run: ssh-keyscan -H ${{ secrets.REMOTE_SSH_HOST }} >> ~/.ssh/known_hosts
+      - name: Create production .env for server
+        run: |
+          touch /home/runner/work/math/math/server/.env
+          echo $PRO_URL > /home/runner/work/math/math/server/.env
+        env:
+          PRO_URL: ${{ PRO_DATABASE_URL }}
 
-      - name: test run
-        run: ssh staging 'touch test.txt'
+      - name: stop service
+        run: ssh staging 'pm2 stop math_server'
+
+      - name: Deploy Server
+        run: rsync -avz --delete --exclude 'node_modules' --exclude 'prisma/migrations' --exclude '.env_template' /home/runner/work/math/math/server/ ${{ secrets.REMOTE_SSH_USER }}@${{ secrets.REMOTE_SSH_HOST }}:${{ secrets.REMOTE_SERVER }}
+      
+      - name: dependencies for server
+        run: ssh staging 'cd math_server && yarn'
+
+      # - name: start server
+      #   run: pm2 start math_server
 
       # - name: Cache dependencies
       #   uses: actions/cache@v2
@@ -68,5 +90,33 @@ jobs:
       #     known_hosts: "just-a-placeholder-so-we-don't-get-errors"
       # - name: Adding Known Hosts
       #   run: ssh-keyscan -H ${{ secrets.REMOTE_HOST }} >> ~/.ssh/known_hosts
-      # - name: Deploy to Server
+      # - name: Deploy Page
       #   run: rsync -avz --delete /home/runner/work/jishu-lowcode.github.io/jishu-lowcode.github.io/dist/ ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:${{ secrets.REMOTE_TARGET }}
+
+      # - name: Deploy Server
+      #   run: rsync -avz --delete --exclude 'node_modules' --exclude 'prisma/migrations' --exclude '.env_template' /home/runner/work/math/math/server/ ${{ secrets.REMOTE_SSH_USER }}@${{ secrets.REMOTE_SSH_HOST }}:${{ secrets.REMOTE_SERVER }}
+
+      # 更新文件完成后，通过ssh登录执行重启服务命令
+
+      # - name: Configure SSH
+      #   run: |
+      #     mkdir -p ~/.ssh/
+      #     echo "$SSH_KEY" > ~/.ssh/staging.key
+      #     chmod 600 ~/.ssh/staging.key
+      #     cat >>~/.ssh/config <<END
+      #     Host staging
+      #       HostName $SSH_HOST
+      #       User $SSH_USER
+      #       IdentityFile ~/.ssh/staging.key
+      #       StrictHostKeyChecking no
+      #     END
+      #   env:
+      #     SSH_USER: ${{ secrets.REMOTE_SSH_USER }}
+      #     SSH_KEY: ${{ secrets.REMOTE_SSH_KEY }}
+      #     SSH_HOST: ${{ secrets.REMOTE_SSH_HOST }}
+
+      # - name: stop service
+      #   run: ssh staging 'pm2 stop math_server'
+
+      # - name: test run
+      #   run: ssh staging 'touch test.txt'
