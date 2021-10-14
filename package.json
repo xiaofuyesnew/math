@@ -17,7 +17,7 @@
     "vite": "^2.6.7"
   },
   "scripts": {
-    "server:start": "pm2 list",
+    "server:start": "node server/app.js",
     "pages:start": "vite",
     "start": "yarn server:start && yarn pages:start",
     "build": "vite build"
