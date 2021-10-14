@@ -56,10 +56,13 @@ jobs:
 
       - name: Deploy Server
         run: rsync -avz --delete --exclude 'node_modules' --exclude 'prisma/migrations' --exclude '.env_template' /home/runner/work/math/math/server/ ${{ secrets.REMOTE_SSH_USER }}@${{ secrets.REMOTE_SSH_HOST }}:${{ secrets.REMOTE_SERVER }}
-      
+
       - name: dependencies for server
         run: ssh staging 'cd math_server && ${{secrets.NPM_GLOBAL}}yarn config set registry "https://registry.npm.taobao.org" && ${{secrets.NPM_GLOBAL}}yarn'
 
+      - name: restart service
+        run: ssh staging '${{secrets.NPM_GLOBAL}}pm2 restart math_server'
+        continue-on-error: true
 
       # - name: start server
       #   run: pm2 start math_server
