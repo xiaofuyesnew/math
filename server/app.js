@@ -1,6 +1,6 @@
-import Koa from 'koa'
-import bodyParser from 'koa-bodyparser'
-import controller from './controller.js'
+const Koa = require('koa')
+const bodyParser = require('koa-bodyparser')
+const controller = require('./controller.js')
 
 const app = new Koa()
 

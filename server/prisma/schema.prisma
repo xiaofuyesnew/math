@@ -3,28 +3,37 @@ datasource db {
   url = env("DATABASE_URL")
 }
 
-model Post {
-  id        Int      @id @default(autoincrement())
+model Quiz {
+  id Int @id @default(autoincrement())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  title     String   @db.VarChar(255)
-  content   String?
-  published Boolean  @default(false)
-  author    User     @relation(fields: [authorId], references: [id])
-  authorId  Int
+  conditions String?
+  content String
+  recordIds String
 }
 
-model Profile {
-  id     Int     @id @default(autoincrement())
-  bio    String?
-  user   User    @relation(fields: [userId], references: [id])
-  userId Int     @unique
+model Qustion {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  description String
+  content Json @db.Json
+  count Int @default(1)
 }
 
-model User {
-  id      Int      @id @default(autoincrement())
-  email   String   @unique
-  name    String?
-  posts   Post[]
-  profile Profile?
+model Wrong {
+  id Int @id @default(autoincrement())
+  questionId Int
+  createdAt DateTime @default(now())
+  record String
+  correct Boolean @default(false)
+}
+
+model Record {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  finish Boolean
+  time String @default("00:00")
+  correct Int
+  wrong Int
 }

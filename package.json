@@ -5,7 +5,14 @@
   "repository": "git@github.com:xiaofuyesnew/math.git",
   "author": "xiaofuyesnew <xiaofuyesnew@qq.com>",
   "license": "MIT",
+  "browserslist": [
+    "> 0.5%",
+    "last 2 versions"
+  ],
   "dependencies": {
+    "axios": "^0.23.0",
+    "qs": "^6.10.1",
+    "vant": "^3.2.5",
     "vue": "^3.2.20",
     "vue-router": "^4.0.11",
     "vuex": "^4.0.2"
@@ -13,8 +20,10 @@
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.9.3",
     "@vue/compiler-sfc": "^3.2.20",
+    "autoprefixer": "^10.3.7",
     "sass": "^1.43.2",
-    "vite": "^2.6.7"
+    "vite": "^2.6.7",
+    "vite-plugin-style-import": "^1.2.1"
   },
   "scripts": {
     "server:start": "node server/app.js",

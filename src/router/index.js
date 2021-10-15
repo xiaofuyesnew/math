@@ -3,8 +3,8 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 const redirect = /Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(
   navigator.userAgent
 )
-  ? '/mobile'
-  : ''
+  ? '/mobile/select'
+  : '/select'
 
 export default createRouter({
   history: createWebHashHistory(),
@@ -14,6 +14,11 @@ export default createRouter({
       path: '/',
       redirect,
       component: () => import('../views/Index.vue'),
+    },
+    {
+      name: "Select",
+      path: "/select",
+      component: () => import('../views/Select.vue'),
     },
     {
       name: 'Mobile',
