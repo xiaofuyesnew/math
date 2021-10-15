@@ -21,10 +21,7 @@ jobs:
         uses: shimataro/ssh-key-action@v2
         with:
           key: ${{ secrets.REMOTE_SSH_KEY }}
-          known_hosts: "just-a-placeholder-so-we-don't-get-errors"
-
-      - name: Adding Known Hosts
-        run: ssh-keyscan -H ${{ secrets.REMOTE_SSH_HOST }} >> ~/.ssh/known_hosts
+          known_hosts: ${{ secrets.REMOTE_KNOWN_HOSTS }}
 
       - name: Configure SSH
         run: |
@@ -77,5 +74,13 @@ jobs:
         if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn --frozen-lockfile
 
-      - name: Deploy Server
+      # - name: Deploy pages
+      #   uses: crazy-max/ghaction-github-pages@v2
+      #   with:
+      #     target_branch: pages
+      #     build_dir: dist
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
+
+      - name: Deploy Page
         run: rsync -avz --delete /home/runner/work/math/math/dist/ ${{ secrets.REMOTE_SSH_USER }}@${{ secrets.REMOTE_SSH_HOST }}:${{ secrets.REMOTE_PAGE }}
