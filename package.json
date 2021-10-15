@@ -19,7 +19,7 @@
   "scripts": {
     "server:start": "node server/app.js",
     "pages:start": "vite",
-    "start": "yarn server:start && yarn pages:start",
+    "start": "yarn server:start | yarn pages:start",
     "build": "vite build"
   }
 }

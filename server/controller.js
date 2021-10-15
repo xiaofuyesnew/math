@@ -1,6 +1,6 @@
 import fs from 'fs'
-import { dirname } from 'path';
-import { fileURLToPath } from 'url';
+import { dirname } from 'path'
+import { fileURLToPath } from 'url'
 import koaRouter from 'koa-router'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
@@ -22,7 +22,7 @@ const addMapping = (router, mapping) => {
   }
 }
 
-const addControllers = (router) => {
+const addControllers = async (router) => {
   let files = fs.readdirSync(`${__dirname}/controllers`)
   console.log(files)
   let js_files = files.filter((f) => {
@@ -30,10 +30,8 @@ const addControllers = (router) => {
   })
 
   for (let f of js_files) {
-    import(`file://${__dirname}/controllers/${f}`).then((mapping) => {
-      console.log(`process controller: ${f}...`)
-      addMapping(router, mapping.default)
-    })
+    const mapping = await import(`file://${__dirname}/controllers/${f}`)
+    addMapping(router, mapping.default)
   }
 }
 
