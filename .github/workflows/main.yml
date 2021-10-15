@@ -82,8 +82,8 @@ jobs:
       #   env:
       #     GITHUB_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
 
-      - name: pwd
-        run: pwd && ls
+      - name: build pages
+        run: yarn build
 
       - name: Deploy Page
         run: rsync -avz --delete /home/runner/work/math/math/dist/ ${{ secrets.REMOTE_SSH_USER }}@${{ secrets.REMOTE_SSH_HOST }}:${{ secrets.REMOTE_PAGE }}
