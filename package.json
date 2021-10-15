@@ -5,13 +5,13 @@
   "repository": "git@github.com:xiaofuyesnew/math.git",
   "author": "xiaofuyesnew <xiaofuyesnew@qq.com>",
   "license": "MIT",
+  "private": true,
   "browserslist": [
     "> 0.5%",
     "last 2 versions"
   ],
   "dependencies": {
     "axios": "^0.23.0",
-    "qs": "^6.10.1",
     "vant": "^3.2.5",
     "vue": "^3.2.20",
     "vue-router": "^4.0.11",
@@ -26,9 +26,7 @@
     "vite-plugin-style-import": "^1.2.1"
   },
   "scripts": {
-    "server:start": "node server/app.js",
-    "pages:start": "vite",
-    "start": "yarn server:start | yarn pages:start",
+    "dev": "vite",
     "build": "vite build"
   }
 }

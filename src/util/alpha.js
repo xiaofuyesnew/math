@@ -1,4 +1,4 @@
-const randomCalc = (limit, num, arr = []) => {
+export const randomCalc = (limit, num, arr = []) => {
   if (num) {
     const randomMethod = Math.random() < 0.5 ? 'plus' : 'minus'
     if (randomMethod === 'plus') {
@@ -38,4 +38,4 @@ const randomCalc = (limit, num, arr = []) => {
   }
 }
 
-console.log(JSON.stringify(randomCalc(10, 10)))
+export default randomCalc

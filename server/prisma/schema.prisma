@@ -3,20 +3,24 @@ datasource db {
   url = env("DATABASE_URL")
 }
 
+generator client {
+  provider = "prisma-client-js"
+}
+
 model Quiz {
   id Int @id @default(autoincrement())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   conditions String?
-  content String
+  content Json @db.Json
   recordIds String
 }
 
-model Qustion {
+model Question {
   id Int @id @default(autoincrement())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  description String
+  description String @unique
   content Json @db.Json
   count Int @default(1)
 }

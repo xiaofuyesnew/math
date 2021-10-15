@@ -1,5 +1,4 @@
 import axios from 'axios'
-import Qs from 'qs'
 
 export const request = {
   get: (param) =>
@@ -18,7 +17,6 @@ export const request = {
       axios({
         ...param,
         method: 'post',
-        transformRequest: [(data) => Qs.stringify(data)],
       })
         .then((res) => {
           console.log(res)
