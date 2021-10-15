@@ -16,10 +16,8 @@ body {
 
 #app {
   width: 100vw;
-  min-width: 800px;
   height: 100vh;
   overflow: hidden;
-  color: #333;
 }
 </style>
 
