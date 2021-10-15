@@ -13,17 +13,17 @@ export default createRouter({
       name: 'Index',
       path: '/',
       redirect,
-      component: () => import('/src/views/index.vue'),
+      component: () => import('../views/index.vue'),
     },
     {
       name: 'Mobile',
       path: '/mobile',
-      component: () => import('/src/mobile/views/Index.vue'),
+      component: () => import('../mobile/views/Index.vue'),
     },
     {
       name: 'MobileSelect',
       path: '/mobile/select',
-      component: () => import('/src/mobile/views/Select.vue'),
+      component: () => import('../mobile/views/Select.vue'),
     },
   ],
 })
