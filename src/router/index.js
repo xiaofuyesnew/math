@@ -13,7 +13,7 @@ export default createRouter({
       name: 'Index',
       path: '/',
       redirect,
-      component: () => import('../views/index.vue'),
+      component: () => import('../views/Index.vue'),
     },
     {
       name: 'Mobile',
