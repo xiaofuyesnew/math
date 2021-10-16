@@ -1,10 +1,4 @@
-import fs from 'fs'
-import { dirname } from 'path'
-import { fileURLToPath } from 'url'
-import koaRouter from 'koa-router'
-
-const __dirname = dirname(fileURLToPath(import.meta.url))
-console.log(__dirname)
+const fs = require('fs')
 
 const addMapping = (router, mapping) => {
   for (let url in mapping) {
@@ -22,23 +16,20 @@ const addMapping = (router, mapping) => {
   }
 }
 
-const addControllers = async (router) => {
-  let files = fs.readdirSync(`${__dirname}/controllers`)
-  console.log(files)
+const addControllers = (router, dir) => {
+  let files = fs.readdirSync(`${__dirname}/${dir}`)
   let js_files = files.filter((f) => {
     return f.endsWith('.js')
   })
 
   for (let f of js_files) {
-    const mapping = await import(`file://${__dirname}/controllers/${f}`)
-    addMapping(router, mapping.default)
+    const mapping = require(`${__dirname}/${dir}/${f}`)
+    addMapping(router, mapping)
   }
 }
 
-const controller = (dir = 'controllers') => {
-  const router = koaRouter()
+module.exports = (dir = 'controllers') => {
+  const router = require('koa-router')()
   addControllers(router, dir)
   return router.routes()
 }
-
-export default controller
