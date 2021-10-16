@@ -15,7 +15,7 @@ const newOne = async (ctx) => {
 
 const updateQuiz = async (ctx, next) => {
   const reqBody = ctx.request.body
-  const { origin } = reqBody
+  const { origin, condition } = reqBody
   if (origin) {
     console.log(origin)
     let queryArr = []
@@ -26,44 +26,74 @@ const updateQuiz = async (ctx, next) => {
         item.num2
       }=`
       let question = null
-      question = await query(async () => {
-        return await prisma.question.findUnique({
-          where: {
-            description,
-          },
-          select: {
-            id: true,
-            description: true,
-            content: true,
-            createdAt: false,
-            updatedAt: false,
-            count: false,
-          },
-        })
-      })
+      question = await query(
+        async () =>
+          await prisma.question.findUnique({
+            where: {
+              description,
+            },
+            select: {
+              id: true,
+              description: true,
+              content: true,
+              createdAt: false,
+              updatedAt: false,
+              count: false,
+            },
+          })
+      )
       if (question === null) {
-        question = await prisma.question.create({
+        question = await query(
+          async () =>
+            await prisma.question.create({
+              data: {
+                description,
+                content: origin[i],
+              },
+              select: {
+                id: true,
+                description: true,
+                content: true,
+                createdAt: false,
+                updatedAt: false,
+                count: false,
+              },
+            })
+        )
+      } else {
+        query(
+          async () =>
+            await prisma.question.update({
+              where: {
+                id: question.id,
+              },
+              data: {
+                count: {
+                  increment: 1,
+                },
+              },
+            })
+        )
+      }
+      queryArr.push(question)
+    }
+
+    const quiz = await query(
+      async () =>
+        await prisma.quiz.create({
           data: {
-            description,
-            content: origin[i],
-          },
-          select: {
-            id: true,
-            description: true,
-            content: true,
-            createdAt: false,
-            updatedAt: false,
-            count: false,
+            condition,
+            content: queryArr.map((item) => item.id),
           },
         })
-      }
-      console.log(question)
-      queryArr.push({ description })
-    }
+    )
 
     ctx.response.body = {
       success: true,
-      data: origin,
+      data: {
+        detail: queryArr,
+        quizId: quiz.id,
+      },
       msg: 'success',
     }
     await next()
@@ -76,9 +106,41 @@ const updateQuiz = async (ctx, next) => {
   }
 }
 
+const getQuizList = async (ctx, next) => {
+  const list = await query(
+    async () =>
+      await prisma.quiz.findMany({
+        select: {
+          id: true,
+          createdAt: false,
+          updatedAt: false,
+          content: true,
+          condition: true,
+          recordIds: true,
+        },
+      })
+  )
+  if (list === null) {
+    ctx.response.body = {
+      success: true,
+      msg: 'success',
+      data: [],
+    }
+  } else {
+    ctx.response.body = {
+      success: true,
+      msg: 'success',
+      data: list,
+    }
+  }
+
+  await next()
+}
+
 module.exports = {
   'GET /': index,
   'GET /hello/:name': hello,
   'GET /new': newOne,
   'POST /updateQuiz': updateQuiz,
+  'GET /getQuizList': getQuizList,
 }
