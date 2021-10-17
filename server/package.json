@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "main": "app.js",
   "license": "MIT",
-  "private": true,
   "dependencies": {
     "@prisma/client": "^3.2.1",
     "koa": "^2.13.3",
