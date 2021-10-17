@@ -16,8 +16,8 @@ const newOne = async (ctx) => {
 const updateQuiz = async (ctx, next) => {
   const reqBody = ctx.request.body
   const { origin, condition } = reqBody
-  if (origin) {
-    console.log(origin)
+  if (origin && condition) {
+    // console.log(origin)
     let queryArr = []
 
     for (let i = 0; i < origin.length; i++) {
@@ -100,7 +100,7 @@ const updateQuiz = async (ctx, next) => {
   } else {
     ctx.response.body = {
       success: false,
-      msg: 'missing param <origin>',
+      msg: 'missing param',
     }
     await next()
   }
