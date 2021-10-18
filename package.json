@@ -5,7 +5,6 @@
   "repository": "git@github.com:xiaofuyesnew/math.git",
   "author": "xiaofuyesnew <xiaofuyesnew@qq.com>",
   "license": "MIT",
-  "type": "module",
   "browserslist": [
     "> 0.5%",
     "last 2 versions"

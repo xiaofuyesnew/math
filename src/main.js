@@ -3,9 +3,9 @@ import App from './App.vue'
 import store from './store'
 import router from './router'
 
-import { Button } from 'vant'
+import { Button, NavBar, Dialog } from 'vant'
 
-const vantComponents = [Button]
+const vantComponents = [Button, NavBar, Dialog]
 
 const app = createApp(App)
 

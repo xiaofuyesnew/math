@@ -7,8 +7,8 @@
 
 <script setup>
 import { reactive } from 'vue'
-import { randomCalc } from '../../util/alpha'
-import { request } from '../../util/index'
+import { randomCalc } from '../util/alpha'
+import { request } from '../util/index'
 const { post, get } = request
 
 const state = reactive({

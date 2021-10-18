@@ -65,6 +65,4 @@ export const randomCalc = (limit, num, arr = []) => {
   }
 }
 
-console.log(randomCalc(10, 10))
-
 export default randomCalc

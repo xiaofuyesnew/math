@@ -23,12 +23,17 @@ export default createRouter({
     {
       name: 'Mobile',
       path: '/mobile',
-      component: () => import('../mobile/views/Index.vue'),
+      component: () => import('../mobile/Index.vue'),
     },
     {
       name: 'MobileSelect',
       path: '/mobile/select',
-      component: () => import('../mobile/views/Select.vue'),
+      component: () => import('../mobile/Select.vue'),
     },
+    {
+      name: 'MobileQuiz',
+      path: '/mobile/quiz',
+      component: () => import('../mobile/Quiz.vue'),
+    }
   ],
 })

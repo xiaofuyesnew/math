@@ -137,10 +137,12 @@ const getQuizList = async (ctx, next) => {
   await next()
 }
 
+const createRecord = async (ctx, next) => {
+  
+}
+
+
 module.exports = {
-  'GET /': index,
-  'GET /hello/:name': hello,
-  'GET /new': newOne,
   'POST /updateQuiz': updateQuiz,
   'GET /getQuizList': getQuizList,
 }
