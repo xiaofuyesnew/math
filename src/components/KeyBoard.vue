@@ -11,7 +11,7 @@
     <div class="key" @click="press('9')">9</div>
     <div class="key" @click="press('.')">.</div>
     <div class="key" @click="press('0')">0</div>
-    <div class="key" @click="press">←</div>
+    <div class="key" @click="press('')">←</div>
   </div>
 </template>
 
@@ -21,18 +21,35 @@
 const emits = defineEmits(['press'])
 
 const press = (value) => {
-  console.log(value)
-  emits('press', { value })
+  emits('press', value)
 }
 </script>
 
 <style lang="scss">
 .keyboard {
   display: flex;
-
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 260px;
+  padding: 20px 20px 10px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  margin: auto;
 
   .key {
-    
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    &:active {
+      opacity: 0.5;
+    }
   }
 }
 </style>
