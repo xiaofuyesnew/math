@@ -9,7 +9,7 @@
     <div class="key" @click="press('7')">7</div>
     <div class="key" @click="press('8')">8</div>
     <div class="key" @click="press('9')">9</div>
-    <div class="key" @click="press('.')">.</div>
+    <div class="key point" @click="press('.')" :class="{ show: point }">.</div>
     <div class="key" @click="press('0')">0</div>
     <div class="key" @click="press('')">←</div>
   </div>
@@ -20,12 +20,28 @@
 
 const emits = defineEmits(['press'])
 
+const props = defineProps({
+  point: {
+    type: Boolean,
+    default: false
+  }
+})
+
 const press = (value) => {
-  emits('press', value)
+  if (value === '.') {
+    if (props.point) {
+      emits('press', value)
+    } else {
+      return false
+    }
+  } else {
+    emits('press', value)
+  }
+
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .keyboard {
   display: flex;
   flex-wrap: wrap;
@@ -47,6 +63,15 @@ const press = (value) => {
     font-size: 36px;
     font-weight: bold;
     margin-bottom: 10px;
+
+    &.point {
+      opacity: 0 !important;
+    }
+
+    &.show {
+      opacity: 1 !important;
+    }
+
     &:active {
       opacity: 0.5;
     }

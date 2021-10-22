@@ -13,6 +13,7 @@ export const randomCalc = (limit, num, arr = []) => {
         return randomCalc(limit, num, arr)
       } else {
         arr.push({
+          method: randomMethod,
           num1,
           num2,
           result: num1 + num2,
