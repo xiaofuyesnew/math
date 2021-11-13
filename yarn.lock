@@ -571,6 +571,11 @@ picomatch@^2.0.4, picomatch@^2.2.1, picomatch@^2.2.2:
   resolved "https://registry.yarnpkg.com/picomatch/-/picomatch-2.3.0.tgz#f1f061de8f6a4bf022892e2d128234fb98302972"
   integrity sha512-lY1Q/PiJGC2zOv/z391WOTD+Z02bCgsFfvxoXXf6h7kv9o+WmsmzYqrAwY63sNgOxE4xEdq0WyUnXfKeBrSvYw==
 
+postcss-px2vp@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/postcss-px2vp/-/postcss-px2vp-1.1.2.tgz#dec116d9d8197ccd855b168926f66a1b55a87672"
+  integrity sha512-CKrp32M5FIdSwZ1zo4dV+ygb6Pi31g+/oZZQ5GsAUZlHZ2KURnEDe0dGkrEA7HK+ZW47Mhs4JhuMOMDFEQju/w==
+
 postcss-value-parser@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/postcss-value-parser/-/postcss-value-parser-4.1.0.tgz#443f6a20ced6481a2bda4fa8532a6e55d789a2cb"
