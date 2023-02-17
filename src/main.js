@@ -1,16 +1,13 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import store from './store'
-import router from './router'
+import router from '@/router'
+import { pinia } from '@/store'
 
-import { Button } from 'vant'
-
-const vantComponents = [Button]
+import './style.css'
 
 const app = createApp(App)
 
-vantComponents.forEach((component) => {
-  app.use(component)
-})
-
-app.use(store).use(router).mount('#app')
+app
+  .use(pinia)
+  .use(router)
+  .mount('#app')
