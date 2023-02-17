@@ -1,32 +1,33 @@
 {
   "name": "math",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
-  "repository": "git@github.com:xiaofuyesnew/math.git",
-  "author": "xiaofuyesnew <xiaofuyesnew@qq.com>",
-  "license": "MIT",
-  "browserslist": [
-    "> 0.5%",
-    "last 2 versions"
-  ],
-  "dependencies": {
-    "axios": "^0.23.0",
-    "vant": "^3.2.5",
-    "vue": "^3.2.20",
-    "vue-router": "^4.0.11",
-    "vuex": "^4.0.2"
-  },
-  "devDependencies": {
-    "@vitejs/plugin-vue": "^1.9.3",
-    "@vue/compiler-sfc": "^3.2.20",
-    "autoprefixer": "^10.3.7",
-    "postcss-px2vp": "^1.1.2",
-    "sass": "^1.43.2",
-    "vite": "^2.6.7",
-    "vite-plugin-style-import": "^1.2.1"
-  },
+  "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build"
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dayjs": "^1.11.7",
+    "pinia": "^2.0.30",
+    "vue": "^3.2.45",
+    "vue-router": "^4.1.6"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.0.0",
+    "autoprefixer": "^10.4.13",
+    "eslint": "^8.34.0",
+    "eslint-plugin-html": "^7.1.0",
+    "eslint-plugin-vue": "^9.9.0",
+    "postcss": "^8.4.21",
+    "tailwindcss": "^3.2.7",
+    "unplugin-auto-import": "^0.14.3",
+    "vite": "^4.1.0",
+    "vite-plugin-mkcert": "^1.13.1"
   }
 }

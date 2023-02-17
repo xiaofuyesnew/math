@@ -1,30 +1,38 @@
+
+import { resolve } from 'path'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import styleImport from 'vite-plugin-style-import'
+import AutoImport from 'unplugin-auto-import/vite'
+import mkcert from 'vite-plugin-mkcert'
 
 export default defineConfig({
-  server: {
-    proxy: {
-      '/api': {
-        target: 'http://localhost:3001',
-        changeOrigin: true,
-        rewrite: path => path.replace(/^\/api/, '')
-      }
-    }
-  },
-  build: {
-    assetsInlineLimit: 0,
-  },
+  base: './',
   plugins: [
     vue(),
-    styleImport({
-      libs: [
-        {
-          libraryName: 'vant',
-          esModule: true,
-          resolveStyle: (name) => `vant/es/${name}/style`,
-        },
+    AutoImport({
+      imports: [
+        'vue',
+        'vue-router',
+        'pinia'
       ],
+      resolvers: [],
+      eslintrc: {
+        enabled: true,
+        filepath: './.eslintrc-auto-import.json',
+        globalsPropValue: true
+      }
     }),
+    mkcert()
   ],
+  resolve: {
+    alias: [
+      {
+        find: '@',
+        replacement: resolve(process.cwd(), 'src')
+      }
+    ]
+  },
+  server: {
+    https: true,
+  }
 })

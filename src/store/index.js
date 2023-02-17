@@ -1,12 +1,3 @@
-import { createStore } from 'vuex'
+import { createPinia } from 'pinia'
 
-export default createStore({
-  state: {
-    count: 0
-  },
-  mutations: {
-    increment (state) {
-      state.count++
-    }
-  }
-})
+export const pinia = createPinia()
