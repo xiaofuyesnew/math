@@ -3,6 +3,10 @@
     <div class="w-full min-h-full">
       <div class="w-full flex flex-col items-center">
         <div>生成时间：{{ time }}</div>
+        <input
+          v-model="num"
+          type="number"
+        >
         <div
           v-for="(item, index) in list"
           :key="index"
@@ -28,13 +32,17 @@ const list = ref([])
 
 const time = ref('')
 
+const num = ref(10)
+
 const generate = () => {
-  list.value = generateList()
+  list.value = generateList(num.value)
   time.value = dayjs().format('YYYY-MM-DD HH:mm:ss')
 }
 
-// onMounted(() => {
-//   list.value = generateList()
-// })
+onMounted(() => {
+  list.value = generateList(num.value)
+  time.value = dayjs().format('YYYY-MM-DD HH:mm:ss')
+})
 
 </script>
+
