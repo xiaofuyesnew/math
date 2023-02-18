@@ -65,9 +65,9 @@ const generateElement = () => {
   }
 }
 
-export const generateList = () => {
+export const generateList = (num) => {
   const list = []
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < num; i++) {
     const element = generateElement()
     console.log(element)
     list.push(element)
