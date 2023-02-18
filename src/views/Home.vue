@@ -33,8 +33,10 @@ const generate = () => {
   time.value = dayjs().format('YYYY-MM-DD HH:mm:ss')
 }
 
-// onMounted(() => {
-//   list.value = generateList()
-// })
+onMounted(() => {
+  list.value = generateList()
+  time.value = dayjs().format('YYYY-MM-DD HH:mm:ss')
+})
 
 </script>
+
